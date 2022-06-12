@@ -47,6 +47,8 @@ sudo apt-get install oracle-java17-installer oracle-java17-set-default
   curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
   sudo apt-get install -y nodejs
 
+  sudo apt install nodejs
+
 # GIT
   sudo add-apt-repository -y ppa:git-core/ppa
   sudo apt-get update
