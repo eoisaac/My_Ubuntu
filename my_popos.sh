@@ -1,97 +1,62 @@
 #!/bin/bash
 
-# FrontEnd Config
+sudo apt update && sudo apt upgrade
 
-# Importante
-sudo apt install dkms make perl gcc build-essential curl -y
+## Git:
+sudo add-apt-repository -y ppa:git-core/ppa
+sudo apt-get update
+sudo apt-get install git -y
 
-# CHROME
-wget https:// dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
+## Chrome:
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+rm ./google-chrome-stable_current_amd64.deb
 
-# FIRACODE
-sudo apt install fonts-firacode
-
-# VSCODE
-sudo apt update
-sudo apt install software-properties-common apt-transport-https wget
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+## VSCode:
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 sudo apt install code
-sudo apt update
-sudo apt upgrade
 
-# FLAMESHOT
+## Flameshot
 sudo apt-get install flameshot -y
-## Configs:
-  ### Remove default printscreen key:
-    gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]' 
-  ### Enable flameshot printscreen key:
-    settings -> keyboard shortcuts -> + 
-    Name: flameshot
-    Command: /usr/bin/flameshot gui
-    Shortcut: prtsc
-  ### Remove tray icon
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
+# settings -> keyboard -> shortcuts -> Command: /usr/bin/flameshot gui && Shortcut: prtsc
 
-# TWEAKS
-sudo apt install gnome-tweaks
-sudo apt install chrome-gnome-shell
+## Node/NPM:
+sudo apt install nodejs npm
+sudo npm install -g n
+sudo n lts
 
-# JDK
-sudo add-apt-repository ppa:linuxuprising/java -y
-sudo apt update
-sudo apt-get install oracle-java17-installer oracle-java17-set-default
+## DBeaver
+flatpak install flathub io.dbeaver.DBeaverCommunity
 
-# NODE
-  ## LATEST LTS VERSION
-  curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-  sudo apt-get install -y nodejs
+## Java: 	
+curl -O https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_linux-x64_bin.tar.gz
+tar xvf openjdk-18_linux-x64_bin.tar.gz
+sudo mv jdk-18 /opt/
+sudo tee /etc/profile.d/jdk18.sh <<EOF
+export JAVA_HOME=/opt/jdk-18
+export PATH=\$PATH:\$JAVA_HOME/bin
+EOF
+source /etc/profile.d/jdk18.sh
 
-  sudo apt install nodejs
+## Docker
 
-# GIT
-  sudo add-apt-repository -y ppa:git-core/ppa
-  sudo apt-get update
-  sudo apt-get install git -y
+## FiraCode:
+sudo apt install fonts-firacode
 
-# ZSH
-  sudo apt install zsh -y
-  chsh -s /bin/zsh
-  zsh
-  ## "enter"
-
-# OHMYZSH
+## ZSH/OhMyZSH:
+sudo apt install zsh -y
+chsh -s /bin/zsh
+zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
-
-# Instalar Zsh Autosuggestions
-# https://github.com/zsh-users/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# Instalar Zsh Syntax Highlighting
-# https://github.com/zsh-users/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
- nano ~/.zshrc
-# UPDATE ZSH PLUGINS
- #plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+## Dock
+gsettings set org.gnome.shell.extensions.dash-to-dock show-trash true
+#  settings set org.gnome.shell.extensions.dash-to-dock transparency-mode 'FIXED'
+#  gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.5
+#  gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
 
-##"CRTL + O -> ENTER -> CTRL + X"
+sudo apt update && sudo apt upgrade
 
-# DOCK
-  ### Set dock to bottom
-  ### Enable transparency
-    settings set org.gnome.shell.extensions.dash-to-dock transparency-mode 'FIXED'
-  ### Set opacity
-    gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.5
-  ### Center dock
-    gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
-  ### Show trash on dock
-    gsettings set org.gnome.shell.extensions.dash-to-dock show-trash true
-
-# GRUB
-
-#NETBEANS
-sudo apt install netbeans -y
-
-
-##"https://gist.github.com/luizomf/1fe6c67f307fc1df19e58f224134dc8f"
