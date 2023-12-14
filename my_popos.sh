@@ -17,30 +17,31 @@ sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/v
 sudo apt install code
 
 ## Flameshot
-sudo apt-get install flameshot -y
-gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
+# sudo apt-get install flameshot -y
+# gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
 # settings -> keyboard -> shortcuts -> Command: /usr/bin/flameshot gui && Shortcut: prtsc
 
 ## Node/NPM:
-sudo apt install nodejs npm
+sudo apt install nodejs npm -y
 sudo npm install -g n
 sudo n lts
+sudo apt purge nodejs npm -y
 
 ## DBeaver
-flatpak install flathub io.dbeaver.DBeaverCommunity
+# flatpak install flathub io.dbeaver.DBeaverCommunity
 
-## Java: 	
-curl -O https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_linux-x64_bin.tar.gz
-tar xvf openjdk-18_linux-x64_bin.tar.gz
-sudo mv jdk-18 /opt/
-sudo tee /etc/profile.d/jdk18.sh <<EOF
-export JAVA_HOME=/opt/jdk-18
-export PATH=\$PATH:\$JAVA_HOME/bin
-EOF
-source /etc/profile.d/jdk18.sh
+## Java:
+# curl -O https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_linux-x64_bin.tar.gz
+# tar xvf openjdk-18_linux-x64_bin.tar.gz
+# sudo mv jdk-18 /opt/
+# sudo tee /etc/profile.d/jdk18.sh <<EOF
+# export JAVA_HOME=/opt/jdk-18
+# export PATH=\$PATH:\$JAVA_HOME/bin
+# EOF
+# source /etc/profile.d/jdk18.sh
+sudo apt install  openjdk-11-jre-headless -y
 
 ## Docker
-
 sudo apt-get install \
     ca-certificates \
     curl \
@@ -53,10 +54,14 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-sudo chmod 666 /var/run/docker.sock 
+# sudo chmod 666 /var/run/docker.sock
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+docker run hello-world
 
-## FiraCode:
-sudo apt install fonts-firacode
+
+
 
 ## ZSH/OhMyZSH:
 sudo apt install zsh -y
@@ -66,6 +71,8 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+## Fonts:
+sudo apt install fonts-firacode
 sudo apt-get install fonts-powerline
 
 git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
@@ -79,5 +86,9 @@ gsettings set org.gnome.shell.extensions.dash-to-dock show-trash true
 #  gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.5
 #  gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
 
+sudo apt install neofetch -y
+# gnome-terminal -- zsh -c "neofetch; exec zsh"
+
+sudo apt autoremove -y
 sudo apt update && sudo apt upgrade
 
