@@ -86,8 +86,15 @@ gsettings set org.gnome.shell.extensions.dash-to-dock show-trash true
 #  gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.5
 #  gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
 
-sudo apt install neofetch -y
 # gnome-terminal -- zsh -c "neofetch; exec zsh"
+
+# Neofetch & wmctrl
+sudo apt install neofetch wmctrl -y
+
+# gnome-terminal -- zsh -c "neofetch; exec zsh" &
+# sleep 1
+# wmctrl -r :ACTIVE: -b add,sticky
+# wmctrl -r :ACTIVE: -b remove,above
 
 sudo apt autoremove -y
 sudo apt update && sudo apt upgrade
