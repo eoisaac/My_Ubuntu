@@ -8,13 +8,13 @@ sudo apt-get update
 sudo apt-get install git -y
 
 ## Chrome:
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-rm ./google-chrome-stable_current_amd64.deb
+# wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+# sudo dpkg -i google-chrome-stable_current_amd64.deb
+# rm ./google-chrome-stable_current_amd64.deb
 
 ## VSCode:
-sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-sudo apt install code
+# sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+# sudo apt install code
 
 ## Flameshot
 # sudo apt-get install flameshot -y
@@ -31,15 +31,7 @@ sudo apt purge nodejs npm -y
 # flatpak install flathub io.dbeaver.DBeaverCommunity
 
 ## Java:
-# curl -O https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_linux-x64_bin.tar.gz
-# tar xvf openjdk-18_linux-x64_bin.tar.gz
-# sudo mv jdk-18 /opt/
-# sudo tee /etc/profile.d/jdk18.sh <<EOF
-# export JAVA_HOME=/opt/jdk-18
-# export PATH=\$PATH:\$JAVA_HOME/bin
-# EOF
-# source /etc/profile.d/jdk18.sh
-sudo apt install  openjdk-11-jre-headless -y
+sudo apt install -y openjdk-17-jre
 
 ## Docker
 sudo apt-get install \
@@ -61,8 +53,6 @@ newgrp docker
 docker run hello-world
 
 
-
-
 ## ZSH/OhMyZSH:
 sudo apt install zsh -y
 chsh -s /bin/zsh
@@ -78,7 +68,6 @@ sudo apt-get install fonts-powerline
 git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
 ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 # ZSH_THEME="spaceship"
-
 
 ## Dock
 gsettings set org.gnome.shell.extensions.dash-to-dock show-trash true
